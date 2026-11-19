@@ -2,11 +2,60 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="refresh" content="0;url=https://wvw.zhuafs.com/download">
-  <title>正在跳转</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f1eb">
+  <link rel="icon" href="data:,">
+  <title>泉途 · 应用下载</title>
+
+  <script>
+    if (!/MicroMessenger|QQ\//i.test(navigator.userAgent)) {
+      const target = new URL("https://wvw.zhuafs.com/download/");
+      const invite = new URLSearchParams(location.search).get("invite");
+      if (invite) target.searchParams.set("invite", invite);
+      location.replace(target.href);
+    }
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f7f1eb;
+      color: #4d382a;
+      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+    .arrow {
+      position: absolute;
+      top: calc(4px + env(safe-area-inset-top, 0px));
+      right: calc(18px + env(safe-area-inset-right, 0px));
+      color: #865c3d;
+      font: 700 52px/1 system-ui, sans-serif;
+    }
+    main {
+      max-width: 510px;
+      margin: auto;
+      padding: calc(76px + env(safe-area-inset-top, 0px)) 22px 40px;
+    }
+    h1 {
+      margin: 0;
+      padding: 28px 22px;
+      border-radius: 23px;
+      background: linear-gradient(125deg, #e8d7bd, #f2e8d8);
+      font: 700 clamp(23px, 6.2vw, 29px)/1.45 "Songti SC", STSong, serif;
+    }
+    ol { margin: 22px 0 0; padding-left: 28px; }
+    li + li { margin-top: 10px; }
+    li::marker { color: #865c3d; font-weight: 700; }
+  </style>
 </head>
 <body>
-  <a href="https://wvw.zhuafs.com/download">点击打开页面</a>
+  <span class="arrow" aria-hidden="true">↗</span>
+  <main>
+    <h1>请在浏览器中打开</h1>
+    <ol>
+      <li>点击右上角的「···」。</li>
+      <li>选择「在浏览器中打开」。iPhone 或 iPad 可选择 Safari。</li>
+    </ol>
+  </main>
 </body>
 </html>
