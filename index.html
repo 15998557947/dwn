@@ -6,6 +6,14 @@
   <meta name="theme-color" content="#f7f1eb">
   <link rel="icon" href="data:,">
   <title>泉途 · 应用下载</title>
+  <script>
+    if (!/MicroMessenger|QQ\//i.test(navigator.userAgent)) {
+      const target = new URL("https://wvw.zhuafs.com/download");
+      const invite = new URLSearchParams(location.search).get("invite")?.trim();
+      if (invite) target.searchParams.set("invite", invite);
+      location.replace(target.href);
+    }
+  </script>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -29,24 +37,10 @@
       border-radius: 23px;
       background: linear-gradient(125deg, #e8d7bd, #f2e8d8);
     }
-    .brand { margin: 0 0 6px; font-weight: 700; }
     h1 { margin: 0; font: 700 27px/1.4 "Songti SC", STSong, serif; }
     ol { padding-left: 26px; }
     li + li { margin-top: 10px; }
     li::marker { color: #865c3d; font-weight: 700; }
-    .download-button {
-      display: block;
-      padding: 13px 16px;
-      border-radius: 28px;
-      background: #865c3d;
-      color: #fff;
-      font-weight: 600;
-      text-align: center;
-      text-decoration: none;
-    }
-    .note { margin: 8px 0 20px; color: #725949; font-size: 14px; }
-    .register { color: #725039; }
-    a:focus-visible { outline: 2px solid #865c3d; outline-offset: 3px; }
   </style>
 </head>
 <body>
@@ -59,41 +53,5 @@
     </ol>
   </main>
 
-  <template id="browser-page">
-    <main>
-      <header class="banner">
-        <p class="brand">泉途 · QUANTU</p>
-        <h1>山水有程，同道而行</h1>
-      </header>
-      <a class="download-button" id="android">下载 Android 版</a>
-      <p class="note">下载 APK 后，按系统提示安装。</p>
-      <a class="download-button" id="ios">添加到 iPhone / iPad</a>
-      <p class="note">请使用 Safari 下载描述文件，再到「设置」中完成安装。</p>
-      <p id="invite-row" hidden>邀请码：<strong id="invite-code"></strong></p>
-      <a class="register" id="register">前往网页版注册 ↗</a>
-    </main>
-  </template>
-
-  <script>
-    if (!/MicroMessenger|QQ\//i.test(navigator.userAgent)) {
-      const official = "https://wvw.zhuafs.com";
-      const page = document.getElementById("browser-page").content.cloneNode(true);
-
-      page.querySelector("#android").href = official + "/downloads/quantu-v1.0.1.apk";
-      page.querySelector("#ios").href = official + "/downloads/quantu.mobileconfig";
-
-      const register = new URL("/?register=1", official);
-      const invite = new URLSearchParams(location.search).get("invite")?.trim();
-
-      if (invite) {
-        register.searchParams.set("invite", invite);
-        page.querySelector("#invite-code").textContent = invite;
-        page.querySelector("#invite-row").hidden = false;
-      }
-
-      page.querySelector("#register").href = register.href;
-      document.getElementById("guide").replaceWith(page);
-    }
-  </script>
 </body>
 </html>
